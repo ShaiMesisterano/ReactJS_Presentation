@@ -1,0 +1,52 @@
+<html>
+	<head><title>React Tutorial</title></head>
+	<body>
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/react/0.10.0/react.min.js"></script>
+        <script src="http://fb.me/react-0.10.0.js"></script>
+        <script src="http://fb.me/JSXTransformer-0.10.0.js"></script>
+        <script type="text/jsx">
+            /** @jsx React.DOM */
+            var Group = React.createClass({
+                render: function(){
+                    return (
+                        <h1>Group {this.props.id}</h1>
+                    );
+                }
+            });
+            var Game = React.createClass({
+                getInitialState: function(){
+                    return { minute: 0 };
+                },
+                incMinute: function(){
+                    this.setState({ minute: this.state.minute + 1 });
+                },
+                render: function(){
+                    return (
+                        <div className="game">
+                            <h2 style={{color: 'red'}}>Minute {this.state.minute}</h2>
+                            <h3>
+                                {this.props.homeTeam} {this.props.homeGoals} - {this.props.awayGoals} {this.props.awayTeam}
+                            </h3>
+                            <button onClick={this.incMinute}>Increase Minute</button>
+                        </div>
+                    );
+                }
+            });
+            var Board = React.createClass({
+              render: function(){
+                  return (
+                    <div className='board'>
+                        <Group id='F' />
+                        <Game homeTeam='Argentina' homeGoals='1' awayTeam='Iran' awayGoals='0' />
+                        <Game homeTeam='Nigeria' homeGoals='1' awayTeam='Bosnia' awayGoals='0' />
+                    </div>
+                  );
+              }
+            });
+            React.renderComponent(
+                <Board />,
+                document.body
+            );
+		</script>
+	</body>
+</html>
